@@ -1,41 +1,50 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
     <h1>Basic Bank</h1>
     <nav class="navbar">
         <div id="firstthree">
-        <a href="index.html"><p>Home</p></a>
-        <a href="money_transfer.html"><p>Money Transfer</p></a>
-        <a href="transactions.html"><p>Transactions</p></a>
+        <a href="index"><p>Home</p></a>
+        <a href="money_transfer"><p>Money Transfer</p></a>
+        <a href="transactions"><p>Transactions</p></a>
         </div>
-        <a href="account.html"><img src="./profile.png"></a>
+        <a href="account"><img src="static/profile.png"></a>
     </nav>
     <div id="flexbox">
         <div id="flexboxcolumn">
             <div id="PI">
-                <div id="BalanceChild"><h3>Welcome,</h3><h1>Ferhat Kunduracı</h1></div>
-                <div id="BalanceChild"><p>Worker with Salary : 3000$</p></div>
+                <div id="BalanceChild"><h3>Welcome,</h3><h1>{{userinfo[2]}} {{userinfo[3]}}</h1></div>
+                {% if userinfo[0]=="Worker" %}
+                <div id="BalanceChild"><p>Worker with Salary : {{userinfo[7]}}$</p></div>
+                {% endif %}
+                {% if userinfo[0]=="Customer" %}
+                <div id="BalanceChild"><p>Dear Customer of BasicBank</p></div>
+                {% endif %}
             </div>
             <div class="items" id="Balance">
-                <div id="BalanceChild"><p id="iban">IBAN: TR000000000000000000000000</p></div>
-                <div id="BalanceChild"><h2>Balance:</h2><p id="money">5921$</p></div>
+                <div id="BalanceChild"><p id="iban">IBAN: {{userinfo[1]}}</p></div>
+                <div id="BalanceChild"><h2>Balance:</h2><p id="money">{{userinfo[4]}}$</p></div>
             </div>
         </div>
+        {% if userinfo[6] | length > 0 %}
         <div class="items" id="flexboxcolumn">
             <div id="Transactions">
-                <h2>Last 5 Transactions</h2>
+                <h2>Last {{5 if userinfo[6] | length > 5 else userinfo[6] | length}} Transactions</h2>
                 <ul>
-                    <li>Farad -> Sarad  :  350$</li>
-                    <li>Farad -> Sarad  :  350$</li>
-                    <li>Farad -> Sarad  :  350$</li>
-                    <li>Farad -> Sarad  :  350$</li>
-                    <li>Farad -> Sarad  :  350$</li>
-                    <li>Farad -> Sarad  :  350$</li>
+                    {% if userinfo[6] | length > 5 %}
+                    {% for x in range(5) %}
+                    <li>{{"FROM" if userinfo[6][x-5][0] else "SENT"}} {{userinfo[6][x-5][1]}}  :  {{userinfo[6][x-5][2]}}$</li>
+                    {% endfor %}
+                    {% else %}
+                    {% for x in range(userinfo[6] | length) %}
+                    <li>{{"FROM" if userinfo[6][x][0] else "SENT"}} {{userinfo[6][x][1]}}  :  {{userinfo[6][x][2]}}$</li>
+                    {% endfor %}
+                    {% endif %}
                 </ul>
             </div>
         </div>
+        {% endif %}
     </div>
 </body>
-<!DOCTYPE html>

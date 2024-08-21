@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
     <h1>Basic Bank</h1>
     <nav class="navbar">
         <div id="firstthree">
-        <a href="index.html"><p>Home</p></a>
-        <a href="money_transfer.html"><p>Money Transfer</p></a>
-        <a href="transactions.html"><p>Transactions</p></a>
+        <a href="index"><p>Home</p></a>
+        <a href="money_transfer"><p>Money Transfer</p></a>
+        <a href="transactions"><p>Transactions</p></a>
         </div>
-        <a href="account.html"><img src="./profile.png"></a>
+        <a href="account"><img src="static/profile.png"></a>
     </nav>
     <div id="flexbox">
         <div id="flexboxcolumn">
             <div id="Money_transfer">
-                <form>
+                <form method="post">
                     <h2 class="mtitems">Money Transfer</h2>
-                    <div class="mtitems"><div><label>IBAN to Transfer: </label></div><div><input type="text" name="iban" required pattern="^TR\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|TR\d{24}$" placeholder="TRXX XXXX XXXX XXXX XXXX XXXX XX" title="Türkiye'de ibanlar 26 karakterden oluşur ve TR ile başlar"></div></div>
-                    <div class="mtitems"><div><label>Amount: </label></div><div><input type="number" name="money" required >$</div></div>
+                    <div class="mtitems"><div><label>IBAN to Transfer: </label></div><div><input type="text" name="ibantr" required pattern="^TR\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|TR\d{24}$" placeholder="TRXX XXXX XXXX XXXX XXXX XXXX XX" title="Türkiye'de ibanlar 26 karakterden oluşur ve TR ile başlar"></div></div>
+                    <div class="mtitems"><div><label>Amount: </label></div><div><input type="number" step=0.01 min=0.01 name="money" required >$</div></div>
                     <button class="mtitems" title="Submit">Send</button>
                 </form>
             </div>

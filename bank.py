@@ -1,4 +1,5 @@
 import csv
+import datetime
 from customer import Customer
 from worker import Worker
 
@@ -16,7 +17,7 @@ class Bank:
                     self.lastiban = int(iban[2:])+1
                 name = lines[2]
                 surname = lines[3]
-                balance = lines[4]
+                balance = float(lines[4])
                 password = lines[5]
                 if isworker:
                     salary = lines[6]
@@ -52,5 +53,17 @@ class Bank:
             if self.customers[i].iban == toiban:
                 toindex = i
         if self.customers[fromindex].balance >= money:
+            date = datetime.datetime.today()
+            date = date.replace(microsecond=0)
             self.customers[fromindex].withdraw(money)
             self.customers[toindex].deposit(money)
+            with open("./transactions/"+self.customers[fromindex].iban+".csv","a") as write:
+                write.write("SENT,"+self.customers[toindex].iban+","+str(money)+","+ str(date)+"\n")
+            with open("./transactions/"+self.customers[toindex].iban+".csv","a") as write:
+                write.write("FROM,"+self.customers[fromindex].iban+","+str(money)+","+ str(date)+"\n")
+    def findiban(self, iban_to_find:str):
+        for i in range(len(self.customers)):
+            if self.customers[i].iban == iban_to_find:
+                return i
+        return -1
+    

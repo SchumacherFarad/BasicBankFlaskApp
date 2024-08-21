@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <h1>Basic Bank</h1>
+    <nav class="navbar">
+        <div id="firstthree">
+        <a href="index"><p>Home</p></a>
+        <a href="money_transfer"><p>Money Transfer</p></a>
+        <a href="transactions"><p>Transactions</p></a>
+        </div>
+        <a href="account"><img src="static/profile.png"></a>
+    </nav>
+    <div id="flexbox">
+        <div id="flexboxcolumn">
+            <div id="Login">
+                <form method="post">
+                <h1 class="Loginitems">LOG IN</h1>
+                <div class="Loginitems"><div><label>IBAN: </label></div><div><input type="text" name="iban" required pattern="^TR\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|TR\d{24}$" placeholder="TRXX XXXX XXXX XXXX XXXX XXXX XX" title="Türkiye'de ibanlar 26 karakterden oluşur ve TR ile başlar"></div></div>
+                <div class="Loginitems"><div><label>Password:</label></div><div><input type="password" name="passw" required placeholder="***********" title="Please enter your password"></div></div>
+                <button  class="Loginitems"title="Submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+

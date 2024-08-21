@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
     <h1>Basic Bank</h1>
     <nav class="navbar">
         <div id="firstthree">
-        <a href="index.html"><p>Home</p></a>
-        <a href="money_transfer.html"><p>Money Transfer</p></a>
-        <a href="transactions.html"><p>Transactions</p></a>
+        <a href="index"><p>Home</p></a>
+        <a href="money_transfer"><p>Money Transfer</p></a>
+        <a href="transactions"><p>Transactions</p></a>
         </div>
-        <a href="account.html"><img src="./profile.png"></a>
+        <a href="account"><img src="static/profile.png"></a>
     </nav>
     <div class="flexbox">
         <div class="flexboxcolumn">
-            <div class="Account">
-                <h3>Profile</h3>
-                <h4></h4><p></p>
+            <div id="Account">
+                <div id="BalanceChild"></dic><h3>Profile</h3></div>
+                <div id="BalanceChild"><h3>{{userinfo[2]}} {{userinfo[3]}}</h3></div>
             </div>
         </div>
     </div>
 </body>
-</!DOCTYPE html>
