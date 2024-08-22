@@ -31,7 +31,7 @@ Clone the repository
   git clone https://github.com/SchumacherFarad/BasicBankFlaskApp
 ```
 
-Proje dizinine gidin
+Navigate to the project directory
 
 ```bash
   cd BasicBankFlaskApp
