@@ -29,12 +29,15 @@ def login():
 
 @app.route('/money_transfer', methods = ['GET', 'POST'])
 def money_transfer():
-    if request.method == "POST":
-        ibantotransact = request.form["ibantr"]
-        moneytotransact = request.form["money"]
-        basicbank.transferMoney(session["userinfo"][1], ibantotransact, float(moneytotransact))
-        basicbank.writePeople("./People.csv")
-    return render_template("money_transfer.html")
+    if "userinfo" in session:
+        if request.method == "POST":
+            ibantotransact = request.form["ibantr"]
+            moneytotransact = request.form["money"]
+            basicbank.transferMoney(session["userinfo"][1], ibantotransact, float(moneytotransact))
+            basicbank.writePeople("./People.csv")
+        return render_template("money_transfer.html")
+    else:
+        return redirect(url_for("login"))
 
 @app.route('/index')
 def index():
@@ -46,7 +49,7 @@ def index():
         userinforms = session["userinfo"]
         return render_template("index.html", userinfo = userinforms)
     else:
-        return redirect(url_for("/"))
+        return redirect(url_for("login"))
 
 @app.route('/transactions')
 def transactions():
@@ -57,7 +60,7 @@ def transactions():
         userinforms = session["userinfo"]
         return render_template("transactions.html", userinfo = userinforms)
     else:
-        return redirect(url_for("/"))
+        return redirect(url_for("login"))
 
 @app.route('/account')
 def account():
@@ -65,7 +68,14 @@ def account():
         userinforms = session["userinfo"]
         return render_template("account.html", userinfo = userinforms)
     else:
-        return redirect(url_for("/"))
+        return redirect(url_for("login"))
+
+@app.route("/signup", methods = ["GET","POST"])
+def signup():
+    if request.method == "POST":
+        return redirect(url_for("login"))#Going to make an proper sign up
+    else:
+        return render_template("signup.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='192.168.1.22',port=5000,  debug=True)

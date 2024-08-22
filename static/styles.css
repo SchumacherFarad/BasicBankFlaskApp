@@ -129,3 +129,21 @@ div#Transactions h2{
     width: 100%;
     text-align: center;
 }
+
+.Loginitems a{
+    display: table-cell;
+    vertical-align: middle;
+    background-color: #EEC50D;
+    color: #081D36;
+    border-color: #EEC50D;
+    width: 40%;
+    align-self: flex-end;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    height: 100%;
+}
+
+input#firstdep[type="number"]{
+    text-align: left;
+}
