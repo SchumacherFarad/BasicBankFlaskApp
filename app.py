@@ -42,6 +42,7 @@ def money_transfer():
 @app.route('/index')
 def index():
     if "userinfo" in session:
+        basicbank.writePeople("./People.csv")
         basicbank.customers[basicbank.findiban(session["userinfo"][1])].transactions.clear()
         basicbank.customers[basicbank.findiban(session["userinfo"][1])].readTransactions()
         session["userinfo"][4] = basicbank.customers[basicbank.findiban(session["userinfo"][1])].balance
@@ -73,7 +74,15 @@ def account():
 @app.route("/signup", methods = ["GET","POST"])
 def signup():
     if request.method == "POST":
-        return redirect(url_for("login"))#Going to make an proper sign up
+        basicbank.addPerson({request.form.get("isworker") == "1"},request.form["nm"],request.form["snm"], request.form["passw"],float(request.form["balance"]), float(1000) if request.form.get("isworker")=="1" else None)
+        new = basicbank.customers[basicbank.findiban(f"TR{(24-len(str(basicbank.lastiban)))*'0'}{basicbank.lastiban-1}")]
+        if isinstance(new,Worker):
+            userinfos = ["Worker",new.iban,new.name,new.surname,new.balance,new.password,new.transactions, new.salary]
+            session["userinfo"] = userinfos
+        elif isinstance(new,Customer):
+            userinfos = ["Customer",new.iban,new.name,new.surname,new.balance,new.password,new.transactions]
+            session["userinfo"] = userinfos
+        return redirect(url_for("index"))
     else:
         return render_template("signup.html")
 
