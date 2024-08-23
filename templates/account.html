@@ -17,6 +17,15 @@
             <div id="Account">
                 <div id="BalanceChild"></dic><h3>Profile</h3></div>
                 <div id="BalanceChild"><h3>{{userinfo[2]}} {{userinfo[3]}}</h3></div>
+                <div id="BalanceChild"><p style="color: rgb(145, 189, 228);">{{userinfo[1]}}</p></div>
+                <div id="Money_transfer">
+                    <form  method="post">
+                        <h2 class="mtitems">Password</h2>
+                        <div class="mtitems"><div><label>Your Password: </label></div><div><input type="number" readonly placeholder="{{userinfo[5]}}"></div></div>
+                        <div class="mtitems"><div><label>Change your password: </label></div><div><input type="text" pattern="[0,9]{4, }" min=0 name="passw" required ></div></div>
+                        <button class="mtitems" title="Submit">Send</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

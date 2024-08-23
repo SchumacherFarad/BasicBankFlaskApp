@@ -12,15 +12,17 @@ A bank simulation that stores user data in a CSV file, uses Python classes, and 
 ## Features
 
 - Money Transfer
+
 - Display last transactions
+
+- Creating new accounts
+
+- Profile page with password change
 
   
 ## Roadmap
-- Creating new accounts
 
 - Deposit, Withdraw
-
-- Profile page with password change
 
   
 ## Run the app on your computer

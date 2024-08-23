@@ -47,6 +47,8 @@ class Bank:
     def transferMoney(self,fromiban:str, toiban:str, money:float):
         fromindex:int
         toindex:int
+        if fromiban == toiban:
+            return -1
         for i in range(0,len(self.customers)):
             if self.customers[i].iban == fromiban:
                 fromindex = i

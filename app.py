@@ -63,11 +63,20 @@ def transactions():
     else:
         return redirect(url_for("login"))
 
-@app.route('/account')
+@app.route('/account', methods=["GET","POST"])
 def account():
     if "userinfo" in session:
-        userinforms = session["userinfo"]
-        return render_template("account.html", userinfo = userinforms)
+        if request.method == "POST":
+            newpass = int(request.form["passw"])
+            basicbank.customers[basicbank.findiban(session["userinfo"][1])].password = newpass
+            session["userinfo"][5] = newpass
+            session["userinfo"] = session["userinfo"]
+            basicbank.writePeople("./People.csv")
+            userinforms = session["userinfo"]
+            return render_template("account.html", userinfo = userinforms)
+        else:
+            userinforms = session["userinfo"]
+            return render_template("account.html", userinfo = userinforms)
     else:
         return redirect(url_for("login"))
 
