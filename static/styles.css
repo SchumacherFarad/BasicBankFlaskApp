@@ -108,7 +108,7 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-button.mtitems, button.Loginitems {
+button.mtitems, button.Loginitems{
     display: table-cell;
     vertical-align: middle;
     background-color: #EEC50D;
@@ -146,4 +146,12 @@ div#Transactions h2{
 
 input#firstdep[type="number"]{
     text-align: left;
+}
+
+button#Exitbut{
+    background-color: #1A1C1E;
+    color: red;
+    margin-top: 50%;
+    min-width: 100px;
+    min-height: 50px;
 }

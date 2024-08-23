@@ -9,23 +9,26 @@ app = Flask(__name__)
 app.secret_key ="748943448fe3fd665c0b97d37b6b0c7b15cc41ea7d8d6107186ed9f6568961e1"
 @app.route('/', methods = ['GET', 'POST'])
 def login():
-    if request.method == "POST":
-        useriban = request.form["iban"]
-        userpass = request.form["passw"]
-        for i in basicbank.customers:
-            if useriban == i.iban:
-                if userpass == i.password:
-                    i.readTransactions()
-                    if isinstance(i,Worker):
-                        userinfos = ["Worker",i.iban,i.name,i.surname,i.balance,i.password,i.transactions,i.salary]
-                        session["userinfo"] = userinfos
-                    elif isinstance(i,Customer):
-                        userinfos = ["Customer",i.iban,i.name,i.surname,i.balance,i.password,i.transactions]
-                        session["userinfo"] = userinfos
-                    return redirect(url_for("index"))
-        return render_template("login.html")
+    if "userinfo" in session:
+        return redirect(url_for("index"))
     else:
-        return render_template("login.html")
+        if request.method == "POST":
+            useriban = request.form["iban"]
+            userpass = request.form["passw"]
+            for i in basicbank.customers:
+                if useriban == i.iban:
+                    if userpass == i.password:
+                        i.readTransactions()
+                        if isinstance(i,Worker):
+                            userinfos = ["Worker",i.iban,i.name,i.surname,i.balance,i.password,i.transactions,i.salary]
+                            session["userinfo"] = userinfos
+                        elif isinstance(i,Customer):
+                            userinfos = ["Customer",i.iban,i.name,i.surname,i.balance,i.password,i.transactions]
+                            session["userinfo"] = userinfos
+                        return redirect(url_for("index"))
+            return render_template("login.html")
+        else:
+            return render_template("login.html")
 
 @app.route('/money_transfer', methods = ['GET', 'POST'])
 def money_transfer():
@@ -39,16 +42,20 @@ def money_transfer():
     else:
         return redirect(url_for("login"))
 
-@app.route('/index')
+@app.route('/index', methods = ["GET" , "POST"])
 def index():
     if "userinfo" in session:
-        basicbank.writePeople("./People.csv")
-        basicbank.customers[basicbank.findiban(session["userinfo"][1])].transactions.clear()
-        basicbank.customers[basicbank.findiban(session["userinfo"][1])].readTransactions()
-        session["userinfo"][4] = basicbank.customers[basicbank.findiban(session["userinfo"][1])].balance
-        session["userinfo"][6] = basicbank.customers[basicbank.findiban(session["userinfo"][1])].transactions
-        userinforms = session["userinfo"]
-        return render_template("index.html", userinfo = userinforms)
+        if request.method == "POST":
+            del session["userinfo"]
+            return redirect(url_for("login"))
+        else:
+            basicbank.writePeople("./People.csv")
+            basicbank.customers[basicbank.findiban(session["userinfo"][1])].transactions.clear()
+            basicbank.customers[basicbank.findiban(session["userinfo"][1])].readTransactions()
+            session["userinfo"][4] = basicbank.customers[basicbank.findiban(session["userinfo"][1])].balance
+            session["userinfo"][6] = basicbank.customers[basicbank.findiban(session["userinfo"][1])].transactions
+            userinforms = session["userinfo"]
+            return render_template("index.html", userinfo = userinforms)
     else:
         return redirect(url_for("login"))
 
