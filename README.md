@@ -31,7 +31,7 @@ Clone the repository
   git clone https://github.com/SchumacherFarad/BasicBankFlaskApp
 ```
 
-Proje dizinine gidin
+Navigate to the project directory
 
 ```bash
   cd BasicBankFlaskApp
@@ -61,7 +61,7 @@ Run the app
 
 If you chose deleting the parameters, go to http://127.0.0.1:5000/ in your browser.
 
-If you chose editing the host parameter with your local ip, go to http://<your local ip>:5000/
+If you chose editing the host parameter with your local ip, go to http://(your local ip):5000/
   
 ## Ekran Görüntüleri
 
