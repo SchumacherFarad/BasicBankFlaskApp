@@ -17,11 +17,34 @@
             <div id="Money_transfer">
                 <form method="post">
                     <h2 class="mtitems">Money Transfer</h2>
-                    <div class="mtitems"><div><label>IBAN to Transfer: </label></div><div><input type="text" name="ibantr" required pattern="^TR\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|TR\d{24}$" placeholder="TRXX XXXX XXXX XXXX XXXX XXXX XX" title="Türkiye'de ibanlar 26 karakterden oluşur ve TR ile başlar"></div></div>
+                    <div class="mtitems">
+                        <input type="radio" name="mtdepwit" required checked value=0 onchange=toggleIBANRequirement()>Money Transfer
+                        <input type="radio" name="mtdepwit" required value=1 onchange=toggleIBANRequirement()>Deposit
+                        <input type="radio" name="mtdepwit" required value=2 onchange=toggleIBANRequirement()>Withdraw
+                    </div>
+                    <div class="mtitems"><div><label>IBAN to Transfer: </label></div><div><input type="text" id="ibantr" name="ibantr" required pattern="^TR\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|TR\d{24}$" placeholder="TRXX XXXX XXXX XXXX XXXX XXXX XX" title="Türkiye'de ibanlar 26 karakterden oluşur ve TR ile başlar"></div></div>
                     <div class="mtitems"><div><label>Amount: </label></div><div><input type="number" step=0.01 min=0.01 name="money" required >$</div></div>
                     <button class="mtitems" title="Submit">Send</button>
                 </form>
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function toggleIBANRequirement() {
+                const ibanInput = document.getElementById('ibantr');
+                const selectedValue = document.querySelector('input[name="mtdepwit"]:checked').value;
+
+                if (selectedValue == 0) {
+                    ibanInput.required = true;
+                } else {
+                    ibanInput.required = false;
+                }
+            }
+            document.querySelectorAll('input[name="mtdepwit"]').forEach(input => {
+                input.addEventListener('change', toggleIBANRequirement);
+            });
+            toggleIBANRequirement();
+        });
+    </script>
 </body>

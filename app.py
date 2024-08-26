@@ -34,10 +34,19 @@ def login():
 def money_transfer():
     if "userinfo" in session:
         if request.method == "POST":
-            ibantotransact = request.form["ibantr"]
-            moneytotransact = request.form["money"]
-            basicbank.transferMoney(session["userinfo"][1], ibantotransact, float(moneytotransact))
-            basicbank.writePeople("./People.csv")
+            if int(request.form["mtdepwit"]) == 0:
+                ibantotransact = request.form["ibantr"]
+                moneytotransact = request.form["money"]
+                basicbank.transferMoney(session["userinfo"][1], ibantotransact, float(moneytotransact))
+                basicbank.writePeople("./People.csv")
+            elif int(request.form["mtdepwit"]) == 1:
+                moneydepo = request.form["money"]
+                basicbank.customers[basicbank.findiban(session["userinfo"][1])].deposit(float(moneydepo))
+                basicbank.writePeople("./People.csv")
+            else:
+                moneywit = request.form["money"]
+                basicbank.customers[basicbank.findiban(session["userinfo"][1])].withdraw(float(moneywit))   
+                basicbank.writePeople("./People.csv")
         return render_template("money_transfer.html")
     else:
         return redirect(url_for("login"))
