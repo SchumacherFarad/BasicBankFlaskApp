@@ -28,8 +28,8 @@
                 <div id="BalanceChild"><h2>Balance:</h2><p id="money">{{userinfo[4]}}$</p></div>
             </div>
         </div>
-        {% if userinfo[6] | length > 0 %}
         <div class="items" id="flexboxcolumn">
+            {% if userinfo[6] | length > 0 %}
             <div id="Transactions">
                 <h2>Last {{5 if userinfo[6] | length > 5 else userinfo[6] | length}} Transactions</h2>
                 <ul>
@@ -44,12 +44,12 @@
                     {% endif %}
                 </ul>
             </div>
+            {% endif %}
             <div id="BalanceChild">
                 <form method="POST">
                     <button id="Exitbut">EXIT</button>
                 </form>
             </div>
         </div>
-        {% endif %}
     </div>
 </body>
