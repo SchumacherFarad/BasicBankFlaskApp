@@ -18,10 +18,7 @@ A bank simulation that stores user data in a CSV file, uses Python classes, and 
 - Creating new accounts
 
 - Profile page with password change
-
   
-## Roadmap
-
 - Deposit, Withdraw
 
   
